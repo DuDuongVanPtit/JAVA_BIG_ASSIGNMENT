@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <style>
+        *{
+            ont-family: 'Roboto',Helvetica,Arial,sans-serif;
+        }
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            line-height: 1;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        html{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /*----------------------------------------------------*/
+
+        #header{
+            width: 100%;
+            background-color: #350a4e;
+        }
+        #header_container{
+            margin: 0 auto;
+            width: 1200px;
+            height: 36px;
+            display: flex;
+            justify-content: space-between;
+        }
+        #header_top-left, #header_top-right{
+            display: flex;
+        }
+        #header_top-left li a, #header_top-right li a{
+            font-size: 12px;
+            line-height: 36px;
+            color: #ffffff;
+            padding: 0 10px;
+            text-decoration: none;
+            font-weight: 550;
+        }
+        #header_top-left li span{
+            font-size: 12px;
+            padding-right: 45px;
+            color: white;
+            line-height: 36px;
+            font-weight: 550;
+            cursor: default;
+        }
+        /*----------------------------------------------------*/
+        #taskbar{
+            z-index: 10;
+            display: flex;
+            position: sticky;
+            top: -1px;
+            width: 100%;
+            height: 80px;
+            background-color: rgba(53, 10, 78, .5);
+        }
+        #taskbar_controller{
+            display: flex;
+            justify-content: space-evenly;
+
+        }
+        #taskbar_controller li{
+            padding: 0px 15px;
+        }
+        #taskbar_controller li a{
+            text-decoration: none;
+            color: white;
+            line-height: 40px;
+        }
+        #taskbar_container{
+            width: 1200px;
+            height: 40px;
+            margin: 0 auto;
+            padding: 20px 0px;
+            display: flex;
+            justify-content: space-between;
+        }
+        /*----------------------------------------------------*/
+        #register{
+            z-index: -1;
+            margin-top: -80px;
+            width: 100%;
+            height: 900px;
+            background: darkgray;
+        }
+        #register_container{
+            margin: 0 auto;
+            width: 1200px;
+            height: 900px;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+        #register_box{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0 auto;
+            width: 450px;
+            height: 600px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+        }
+        #register_box header{
+            padding-top:15px;
+            font-size: 1.5rem;
+            color: #333;
+            font-weight: 600;
+            text-align: center;
+        }
+        #register_box .register_box-form{
+            margin-top: 10px;
+        }
+        .register_box-form .input_box{
+            width: 80%;
+            padding-top: 20px;
+            margin: 0 auto;
+        }
+        .input_box label{
+            color: #333;
+        }
+        .register_box-form .input_box input{
+            position: relative;
+            height: 40px;
+            width: 100%;
+            outline: none;
+            font-size: 0.9rem;
+            color: #484545;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding-left: 15px;
+            left: -10px;
+        }
+        .register_box-form .column{
+            display: flex;
+            column-gap: 15px;
+        }
+        .register_box-form .column input{
+            width: 65%;
+            left: 30px;
+        }
+        #register_box button{
+            position: relative;
+            top: 30px;
+            left: 36px;
+            height: 40px;
+            width: 84%;
+            cursor: pointer;
+            background-color: rgb(73, 173, 73);
+            color: white;
+            font-weight: 600;
+            border-radius: 5px;
+            border: none;
+        }
+
+    </style>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+</head>
+<body>
+<div id="header">
+    <div id="header_container">
+        <ul id="header_top-left">
+            <li>
+                        <span title="số điện thoại">
+                            +84332625935
+                        </span>
+            </li>
+            <li>
+                <a title="facebook" href="https://www.facebook.com/du.duongvan.9843">
+                    <i class="fa-brands fa-facebook-f" style="color: #ffffff;"></i>
+                </a>
+            </li>
+            <li>
+                <a title="twitter" href="">
+                    <i class="fa-brands fa-twitter" style="color: #ffffff;"></i>
+                </a>
+            </li>
+            <li>
+                <a title="youtube" href="">
+                    <i class="fa-brands fa-youtube" style="color: #ffffff;"></i>
+                </a>
+            </li>
+        </ul>
+        <ul id="header_top-right">
+            <li>
+                <a href="">
+                    LOGIN
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/home/register}">
+                    REGISTER
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="taskbar">
+    <div id="taskbar_container">
+        <div style="line-height: 40px;">TRAVELIX</div>
+        <ul id="taskbar_controller">
+            <li>
+                <a th:href="@{/home}">HOME</a>
+            </li>
+            <li>
+                <a href="">ABOUT</a>
+            </li>
+            <li>
+                <a href="">OFFERS</a>
+            </li>
+            <li>
+                <a href="">NEWS</a>
+            </li>
+            <li>
+                <a href="">CONTACT</a>
+            </li>
+        </ul>
+        <div>
+            <i class="fa-solid fa-magnifying-glass" style="color: #ffffff; line-height: 40px"></i>
+        </div>
+    </div>
+</div>
+<div id="register">
+    <div id="register_container">
+        <section id="register_box">
+            <header>Register</header>
+            <form action="#" class="register_box-form">
+                <div class="input_box">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter full name"/>
+                </div>
+
+                <div class="input_box">
+                    <label>Email Address</label>
+                    <input type="text" placeholder="Enter email address"/>
+                </div>
+
+                <div class="input_box">
+                    <label>Phone Number</label>
+                    <input type="text" placeholder="Enter phone number"/>
+                </div>
+
+                <div class="input_box">
+                    <label>Address</label>
+                    <input type="text" placeholder="Enter street address"/>
+                </div>
+
+                <div class="input_box">
+                    <label>Password</label>
+                    <input type="text" placeholder="Enter password"/>
+                    <input type="text" placeholder="Confirm password"/>
+                </div>
+            </form>
+            <button>Register Now</button>
+        </section>
+    </div>
+</div>
+</body>
+</html>

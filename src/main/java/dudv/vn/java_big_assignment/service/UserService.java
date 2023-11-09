@@ -14,9 +14,8 @@ import java.util.ArrayList;
 public class UserService {
     @Autowired
     UserRepository userRepository;
-
-    public ArrayList<UserEntity> getAllUser(String fullName){
-        return userRepository.findAllByFullName(fullName);
+    public ArrayList<UserEntity> getAllUser(){
+        return (ArrayList<UserEntity>) userRepository.findAll();
     }
 
     public UserDto getDetailByPhone(String phoneNumber){
@@ -25,6 +24,7 @@ public class UserService {
         if(userDto != null){
             BeanUtils.copyProperties(userEntity, userDto);
         }
+        else return null;
         return userDto;
     }
 
@@ -34,6 +34,7 @@ public class UserService {
         if(userDto != null){
             BeanUtils.copyProperties(userEntity, userDto);
         }
+        else return null;
         return userDto;
     }
 
