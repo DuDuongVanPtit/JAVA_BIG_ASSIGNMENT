@@ -22,10 +22,5 @@ public class UserController {
         model.addAttribute("list", list);
         return "/user/listUser.html";
     }
-    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    String detaiUser(@PathVariable Integer id, Model model){
-        Object u = userService.getDetailById(id);
-        model.addAttribute("userDto", u);
-        return "/user/create.html";
-    }
+
 }

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class UserService {
     @Autowired
     UserRepository userRepository;
+
     public ArrayList<UserEntity> getAllUser(){
         return (ArrayList<UserEntity>) userRepository.findAll();
     }

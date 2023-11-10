@@ -184,10 +184,9 @@
             width: 65%;
             left: 30px;
         }
-        #register_box button{
-            position: relative;
-            top: 30px;
-            left: 36px;
+        .register_box-form button{
+            margin-left: 37px;
+            margin-top: 30px;
             height: 40px;
             width: 84%;
             cursor: pointer;
@@ -273,34 +272,33 @@
     <div id="register_container">
         <section id="register_box">
             <header>Register</header>
-            <form action="#" class="register_box-form">
+            <form th:action="@{/home/save}" method="post" th:object="${userDto}" class="register_box-form">
                 <div class="input_box">
                     <label>Full Name</label>
-                    <input type="text" placeholder="Enter full name"/>
+                    <input th:field="*{fullName}" type="text" placeholder="Enter full name" />
                 </div>
 
                 <div class="input_box">
                     <label>Email Address</label>
-                    <input type="text" placeholder="Enter email address"/>
+                    <input th:field="*{email}" type="email" placeholder="Enter email address"/>
                 </div>
+                                <div class="input_box">
+                                    <label>Phone Number</label>
+                                    <input th:field="*{phoneNumber}" type="text" placeholder="Enter phone number"/>
+                                </div>
 
-                <div class="input_box">
-                    <label>Phone Number</label>
-                    <input type="text" placeholder="Enter phone number"/>
-                </div>
+                                <div class="input_box">
+                                    <label>Address</label>
+                                    <input th:field="*{address}" type="text" placeholder="Enter street address"/>
+                                </div>
 
-                <div class="input_box">
-                    <label>Address</label>
-                    <input type="text" placeholder="Enter street address"/>
-                </div>
-
-                <div class="input_box">
-                    <label>Password</label>
-                    <input type="text" placeholder="Enter password"/>
-                    <input type="text" placeholder="Confirm password"/>
-                </div>
+                                <div class="input_box">
+                                    <label>Password</label>
+                                    <input th:field="*{password}" type="password" placeholder="Enter password"/>
+                                    <input type="password" placeholder="Confirm password"/>
+                                </div>
+                <button type="submit">Register Now</button>
             </form>
-            <button>Register Now</button>
         </section>
     </div>
 </div>
