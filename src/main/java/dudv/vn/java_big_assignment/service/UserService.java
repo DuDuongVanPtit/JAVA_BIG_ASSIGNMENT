@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 
 @Service
+@Transactional
 public class UserService {
     @Autowired
     UserRepository userRepository;
@@ -22,21 +24,13 @@ public class UserService {
     public UserDto getDetailByPhone(String phoneNumber){
         UserDto userDto = new UserDto();
         UserEntity userEntity = userRepository.findFirstByPhoneNumber(phoneNumber);
-        if(userDto != null){
+        if(userDto != null && userEntity != null){
             BeanUtils.copyProperties(userEntity, userDto);
+            return userDto;
         }
-        else return null;
-        return userDto;
-    }
-
-    public UserDto getDetailById(Integer id){
-        UserDto userDto = new UserDto();
-        UserEntity userEntity = userRepository.findById(id).get();
-        if(userDto != null){
-            BeanUtils.copyProperties(userEntity, userDto);
+        else{
+            return null;
         }
-        else return null;
-        return userDto;
     }
 
     public UserDto addUser(UserDto userDto){

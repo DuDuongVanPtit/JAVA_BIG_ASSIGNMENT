@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <style>
+        *{
+            ont-family: 'Roboto',Helvetica,Arial,sans-serif;
+        }
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            line-height: 1;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        html{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        /*---------------------------------------------------*/
+        body{
+            height: 5000px;
+        }
+        #header{
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: 65px;
+            background-color: white;
+            border-bottom: 1px solid #8b8b8b;
+            display: flex;
+            justify-content: space-around;
+        }
+        #header ul{
+            display: flex;
+            justify-content: space-around;
+            width: 60%;
+            height: 100%;
+        }
+        #header #box_search{
+            display: flex;
+            justify-content: space-between;
+            border: 1px solid #8b8b8b;
+            border-radius: 30px;
+            width: 100%;
+            height: 60%;
+            margin: 13px;
+        }
+        #header #box_search input{
+            border: none;
+            outline: none;
+            margin-left: 30px;
+            width: 80%;
+            font-size: 18px;
+        }
+        #header ul li a{
+            line-height: 65px;
+            text-decoration: none;
+        }
+        #sidebar{
+            height: calc(100vh - 66px);
+            width: 250px;
+            position: sticky;
+            top: 66px;
+            button: 66px;
+            border-right: 1px solid #8b8b8b;
+        }
+        #sidebar #sidebar_container{
+            width: 80%;
+            padding: 20px 10%;
+            height: 100%;
+            background-color: white;
+        }
+        #sidebar_container ul li{
+            margin-bottom: 20px;
+            width: 100%;
+            height: 30px;
+            font-size: 20px;
+        }
+        #sidebar_container ul li a{
+            text-decoration: none;
+            padding-left: 20px;
+            line-height: 30px;
+            color: black;
+            font-size: 18px;
+        }
+    </style>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+</head>
+<body>
+    <div id="header">
+            <div style="line-height: 65px">
+                TRAVELIX
+            </div>
+            <ul>
+                <li>
+                    <a href="">
+                        HOME
+                    </a>
+                </li>
+                <li style="width: 40%">
+                    <div id="box_search">
+                        <input type="text" placeholder="Search">
+                        <i class="fa-solid fa-magnifying-glass" style="margin-right: 20px; line-height: 37px"></i>
+                    </div>
+                </li>
+                <li>
+                    <a href="">
+                        view as a user
+                    </a>
+                </li>
+            </ul>
+            <div style="line-height: 65px">
+                LOGOUT
+            </div>
+        </div>
+    <div id="sidebar">
+        <div id="sidebar_container">
+            <ul>
+                <li>
+                    <i class="fa-brands fa-servicestack"></i>
+                    <a href="">
+                        Service
+                    </a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-user"></i>
+                    <a href="">
+                        User
+                    </a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-cart-plus"></i>
+                    <a href="">
+                        Category
+                    </a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-barcode"></i>
+                    <a href="">
+                        Order
+                    </a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-envelope"></i>
+                    <a href="">
+                        FeedBack
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="display">
+        ok
+    </div>
+</body>
+</html>

@@ -8,7 +8,5 @@ import java.util.ArrayList;
 
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 
-        ArrayList<UserEntity> findAllByFullName(String fullName);
-
         UserEntity findFirstByPhoneNumber(String phoneNumber);
 }

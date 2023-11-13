@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Login</title>
+        <style>
+            #login{
+                z-index: -1;
+                margin-top: -80px;
+                width: 100%;
+                height: 1000px;
+                background-image: url("/images/login.jpg");
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            #login_container{
+                margin: 0 auto;
+                width: 1200px;
+                height: 900px;
+                position: relative;
+                justify-content: center;
+                align-items: center;
+                display: flex;
+            }
+            #login_box{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                margin: 0 auto;
+                width: 450px;
+                height: 450px;
+                background: white;
+                border-radius: 8px;
+                box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+            }
+            #login_box header{
+                font-size: 1.5rem;
+                color: #333;
+                font-weight: 600;
+                text-align: center;
+            }
+            #login_box .login_box-form{
+                margin-top: 10px;
+            }
+            .login_box-form .input_box{
+                width: 80%;
+                margin: 0 auto;
+            }
+            .input_box label{
+                color: #333;
+                font-size: 13px;
+                font-weight: 600;
+                position: relative;
+                top: 8px;
+                left: 10px;
+                z-index: 5;
+                background-color: white;
+            }
+            .login_box-form .input_box input{
+                position: relative;
+                height: 40px;
+                width: 100%;
+                outline: none;
+                font-size: 13px;
+                color: #484545;
+                border: 1px solid #8b8b8b;
+                border-radius: 15px;
+                padding-left: 15px;
+                left: -10px;
+            }
+            .login_box-form .column input{
+                width: 65%;
+                left: 30px;
+            }
+            .login_box-form button{
+                position: relative;
+                top: 40px;
+                left: 37px;
+                height: 40px;
+                width: 84%;
+                cursor: pointer;
+                background-color: rgb(73, 173, 73);
+                color: white;
+                font-weight: 600;
+                border-radius: 15px;
+                border: none;
+            }
+            .input_box .errors_alert{
+                width: 100%;
+                height: 20px;
+                display: flex;
+                justify-content: space-between;
+                position: relative;
+            }
+            .login_box-form .input_box .errors_alert label{
+                color: red;
+                position: absolute;
+                top: 5px;
+            }
+            .login_box-form .for_register{
+                height: 20px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-top: 10px;
+            }
+            .for_register a{
+                font-weight: 600;
+                color: green;
+                text-decoration: none;
+                padding-left: 5px;
+            }
+            .for_register h3{
+                padding-right: 5px;
+                color: #707070;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- ------------------HEADER------------------ -->
+        <div th:replace="fragments/header :: html"></div>
+        <!-- ------------------HEADER------------------ -->
+
+        <div id="login">
+            <div id="login_container">
+                <section id="login_box">
+
+                    <div style="height: 120px; width: 100%; display: flex; justify-content: center">
+                        <i class="fa-solid fa-circle-user" style="color: #000000; font-size: 80px; line-height: 120px"></i>
+                    </div>
+                    <header> MEMBER LOGIN </header>
+
+                    <form class="login_box-form">
+
+                        <div class="input_box">
+                            <label>Login info <i class="fa-solid fa-asterisk" style="color: #d51a1a; position: relative; font-size: 8px; top: -4px; left: -3px"></i></label>
+                            <input type="text" placeholder="Enter your email or phone number" />
+                            <div class="errors_alert">
+<!--                                <label>ok</label>-->
+                            </div>
+                        </div>
+
+                        <div class="input_box">
+                            <label>Password <i class="fa-solid fa-asterisk" style="color: #d51a1a; position: relative; font-size: 8px; top: -4px; left: -3px"></i></label>
+                            <input type="password" placeholder="Enter your password"/>
+                            <div class="errors_alert">
+<!--                                <label>ok</label>-->
+                            </div>
+                        </div>
+
+                        <div class="for_register">
+                            <h3>Don't have an account?</h3>
+                            <a th:href="@{/home/register}">Register</a>
+                        </div>
+
+                        <button type="submit" style="font-size: 18px">Log in</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+
+    </body>
+</html>
