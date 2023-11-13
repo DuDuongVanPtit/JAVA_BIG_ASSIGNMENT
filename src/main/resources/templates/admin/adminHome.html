@@ -56,6 +56,10 @@
         /*---------------------------------------------------*/
         body{
             height: 5000px;
+            width: 100%;
+            /*background-image: url("/images/adminHome1.jpg");*/
+            /*background-repeat: no-repeat;*/
+            /*background-size: cover;*/
         }
         #header{
             position: sticky;
@@ -65,11 +69,11 @@
             background-color: white;
             border-bottom: 1px solid #8b8b8b;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
         }
         #header ul{
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             width: 60%;
             height: 100%;
         }
@@ -92,6 +96,8 @@
         #header ul li a{
             line-height: 65px;
             text-decoration: none;
+            font-size: 20px;
+            color: black;
         }
         #sidebar{
             height: calc(100vh - 66px);
@@ -112,6 +118,7 @@
             width: 100%;
             height: 30px;
             font-size: 20px;
+            border-bottom: 1px solid black;
         }
         #sidebar_container ul li a{
             text-decoration: none;
@@ -129,11 +136,12 @@
 </head>
 <body>
     <div id="header">
-            <div style="line-height: 65px">
+            <div style="line-height: 65px; font-size: 30px; padding-left: 25px">
                 TRAVELIX
             </div>
             <ul>
                 <li>
+                    <i class="fa-solid fa-house" style="line-height: 65px; font-size: 20px"></i>
                     <a href="">
                         HOME
                     </a>
@@ -145,13 +153,16 @@
                     </div>
                 </li>
                 <li>
+                    <i class="fa-regular fa-user" style="line-height: 65px; font-size: 20px"></i>
                     <a href="">
                         view as a user
                     </a>
                 </li>
             </ul>
-            <div style="line-height: 65px">
-                LOGOUT
+            <div>
+                <a href="" style="line-height: 65px; padding-right: 25px; text-decoration: none; color: black">
+                    LOGOUT <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
             </div>
         </div>
     <div id="sidebar">
@@ -190,7 +201,6 @@
             </ul>
         </div>
     </div>
-
     <div id="display">
         ok
     </div>
