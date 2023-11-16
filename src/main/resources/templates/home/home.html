@@ -7,15 +7,51 @@
         #slider{
             position: relative;
             top: -80px;
-            height: 1124px;
+            height: 900px;
             width: 100%;
         }
-        #container_slider{
+        #slider_container{
             background-image: url("/images/slider1.jpg");
             height: 100%;
             width: 100%;
             background-size: cover;
             background-repeat: no-repeat;
+        }
+        #category{
+            position: absolute;
+            height: 100px;
+            width: 100%;
+            bottom: 10px;
+        }
+        #category_container{
+            width: 1200px;
+            height: 100%;
+            margin: 0 auto;
+            background-color: #fff3f3;
+            border: 1px solid #4793f5;
+            border-radius: 50px;
+        }
+        #category_container ul{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+        #category_container ul li{
+            height: 100%;
+            width: 200px;
+            text-align: center;
+        }
+        #category_container ul li a{
+            line-height: 100px;
+            text-decoration: none;
+            color: black;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        #category_container ul li a i{
+            color: #4793f5;
+            padding-right: 7px;
         }
     </style>
 </head>
@@ -24,8 +60,31 @@
     <div th:replace="fragments/header :: html"></div>
     <!-- ------------------HEADER------------------ -->
     <div id="slider">
-        <div id="container_slider">
-
+        <div id="slider_container">
+            <div id="category">
+                <div id="category_container">
+                    <ul>
+                        <li>
+                            <a href=""><i class="fa-solid fa-hotel"></i> HOTELS</a>
+                        </li>
+                        <li>
+                            <a href=""><i class="fa-solid fa-car"></i>CAR RENTAILS</a>
+                        </li>
+                        <li>
+                            <a href=""><i class="fa-solid fa-plane-departure"></i>FLIGHTS</a>
+                        </li>
+                        <li>
+                            <a href=""><i class="fa-solid fa-umbrella"></i>TRIPS</a>
+                        </li>
+                        <li>
+                            <a href=""><i class="fa-solid fa-ferry"></i>CUISES</a>
+                        </li>
+                        <li>
+                            <a href=""><i class="fa-solid fa-person-swimming"></i>ACTIVITIES</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </body>

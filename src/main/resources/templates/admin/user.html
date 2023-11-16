@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #display table{
+            width: 70%;
+            height: fit-content;
+            margin-top: 20px;
+            font-size: 25px;
+        }
+        #display table tr td{
+            line-height: 40px;
+            text-align: center;
+        }
+        #display table tr th, #display table tr td{
+            border: 1px solid #000;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="fragments/adminHeader :: html"></div>
+    <div id="display">
+        <table>
+            <tr bgcolor="#808080" class="row">
+                <th>FUllNAME</th>
+                <th>Email</th>
+                <th>PhoneNumber</th>
+                <th>Address</th>
+            </tr>
+            <tr bgcolor="#d3d3d3" th:each="user : ${list}" class="row">
+                <td th:text="${user.fullName}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.phoneNumber}"></td>
+                <td th:text="${user.address}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+    <head>
     <meta charset="UTF-8">
     <title>Register</title>
     <style>
@@ -55,7 +55,8 @@
         }
         /*---------------------------------------------------*/
         body{
-            height: 5000px;
+            position: relative;
+            height: 100%;
             width: 100%;
             font-family: 'Open Sans', sans-serif;
             /*background-image: url("/images/adminHome1.jpg");*/
@@ -112,8 +113,8 @@
         }
         #sidebar #sidebar_container{
             width: 80%;
+            height: calc(100% - 40px);
             padding: 20px 10%;
-            height: 100%;
             background-color: white;
         }
         #sidebar_container ul li{
@@ -132,41 +133,16 @@
         }
         /*----------------------DISPLAY-----------------------------*/
         #display{
-            position: relative;
+            position: absolute;
             z-index: -1;
             left: 251px;
-            top: calc(-100vh + 65px);
-            width: calc(100% - 251px);
+            top: 66px;
             height: calc(100% - 66px);
+            width: calc(100% - 251px);
             background-color: #e3e0e0;
             display: flex;
             justify-content: center;
         }
-        #display #welcome{
-            margin-top: 50px;
-            width: 700px;
-            height: 700px;
-        }
-        #welcome #avatar{
-            margin: 10px auto;
-            width: 200px;
-            height: 200px;
-            background-color: wheat;
-            border-radius: 100px;
-            background-image: url("/images/login.jpg");
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        #welcome #hello{
-            text-align: center;
-            font-size: 30px;
-            margin-bottom: 50px;
-        }
-        #welcome #text{
-            text-align: center;
-            font-size: 100px;
-        }
-
     </style>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -174,8 +150,8 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"
     />
 </head>
-<body>
-    <div id="header">
+    <body>
+        <div id="header">
             <div style="line-height: 65px; font-size: 30px; padding-left: 25px">
                 TRAVELIX
             </div>
@@ -205,55 +181,43 @@
                 </a>
             </div>
         </div>
-    <div id="sidebar">
-        <div id="sidebar_container">
-            <ul>
-                <li>
-                    <i class="fa-brands fa-servicestack"></i>
-                    <a href="">
-                        Service
-                    </a>
-                </li>
-                <li>
-                    <i class="fa-solid fa-user"></i>
-                    <a href="">
-                        User
-                    </a>
-                </li>
-                <li>
-                    <i class="fa-solid fa-cart-plus"></i>
-                    <a href="">
-                        Category
-                    </a>
-                </li>
-                <li>
-                    <i class="fa-solid fa-barcode"></i>
-                    <a href="">
-                        Order
-                    </a>
-                </li>
-                <li>
-                    <i class="fa-solid fa-envelope"></i>
-                    <a href="">
-                        FeedBack
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div id="display">
-        <div id="welcome">
-            <div id="avatar">
 
-            </div>
-            <h1 id="hello">HELLO ADMIN</h1>
-
-            <div id="text">
-                <h1>WELCOME TO</h1>
-                <h1>management</h1>
+        <div id="sidebar">
+            <div id="sidebar_container">
+                <ul>
+                    <li>
+                        <i class="fa-brands fa-servicestack"></i>
+                        <a href="">
+                            Service
+                        </a>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-user"></i>
+                        <a href="">
+                            User
+                        </a>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-cart-plus"></i>
+                        <a href="">
+                            Category
+                        </a>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-barcode"></i>
+                        <a href="">
+                            Order
+                        </a>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-envelope"></i>
+                        <a href="">
+                            FeedBack
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
 
-</body>
+    </body>
 </html>
