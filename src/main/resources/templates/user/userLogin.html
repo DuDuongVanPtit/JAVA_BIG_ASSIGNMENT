@@ -115,6 +115,7 @@
                 padding-right: 5px;
                 color: #707070;
             }
+
         </style>
     </head>
     <body>
@@ -131,21 +132,25 @@
                     </div>
                     <header> MEMBER LOGIN </header>
 
-                    <form class="login_box-form">
+                    <form th:action="@{/home/loginSuccessful}" method="post" th:object="${userDto}" class="login_box-form">
 
                         <div class="input_box">
                             <label>Login info <i class="fa-solid fa-asterisk" style="color: #d51a1a; position: relative; font-size: 8px; top: -4px; left: -3px"></i></label>
-                            <input type="text" placeholder="Enter your email or phone number" />
+                            <input th:field="*{email}" type="text" placeholder="Enter your email or phone number" />
                             <div class="errors_alert">
-<!--                                <label>ok</label>-->
+                            </div>
+                            <div class="errors_alert" style="height: 0px;">
+                                <label th:text="${emailError}" style="top: -15px"></label>
                             </div>
                         </div>
 
                         <div class="input_box">
                             <label>Password <i class="fa-solid fa-asterisk" style="color: #d51a1a; position: relative; font-size: 8px; top: -4px; left: -3px"></i></label>
-                            <input type="password" placeholder="Enter your password"/>
+                            <input th:field="*{password}" type="password" placeholder="Enter your password"/>
                             <div class="errors_alert">
-<!--                                <label>ok</label>-->
+                            </div>
+                            <div class="errors_alert" style="height: 0px;">
+                                <label th:text="${passwordError}" style="top: -15px"></label>
                             </div>
                         </div>
 
@@ -155,7 +160,9 @@
                         </div>
 
                         <button type="submit" style="font-size: 18px">Log in</button>
+
                     </form>
+
                 </section>
             </div>
         </div>

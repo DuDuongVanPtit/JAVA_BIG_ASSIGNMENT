@@ -18,7 +18,11 @@ public class UserService {
     UserRepository userRepository;
 
     public ArrayList<UserEntity> getAllUser(){
-        return (ArrayList<UserEntity>) userRepository.findAll();
+        ArrayList<UserEntity> ans = ((ArrayList<UserEntity>) userRepository.findAll());
+        ans.sort((o1, o2) -> {
+            return o1.getAddress().compareTo(o2.getAddress());
+        });
+        return ans;
     }
 
     public UserDto getDetailByPhone(String phoneNumber){
@@ -31,6 +35,16 @@ public class UserService {
         else{
             return null;
         }
+    }
+
+    public UserDto getDetailByEmail(String email){
+        UserDto userDto = new UserDto();
+        UserEntity userEntity = userRepository.findFirstByEmail(email);
+        if(userDto != null && userEntity != null){
+            BeanUtils.copyProperties(userEntity, userDto);
+            return userDto;
+        }
+        else return null;
     }
 
     public UserDto addUser(UserDto userDto){

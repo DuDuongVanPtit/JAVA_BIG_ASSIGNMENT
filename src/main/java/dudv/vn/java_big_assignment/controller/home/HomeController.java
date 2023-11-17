@@ -23,18 +23,38 @@ public class HomeController {
 
     @Autowired
     UserService userService;
+
     @RequestMapping(method = RequestMethod.GET, value = "/register")
     String registerForm(@RequestParam(required = false) String fullName, Model model){
-        Object list = userService.getAllUser();
-        model.addAttribute("list", list);
         UserDto userDto = new UserDto();
         model.addAttribute("userDto", userDto);
         return "/user/createUser.html";
     }
 
-    @RequestMapping("/login")
-    String loginForm(){
+    @RequestMapping(method = RequestMethod.GET, value = "/login")
+    String loginForm(@RequestParam(required = false) String fullName, Model model){
+        UserDto userDto = new UserDto();
+        model.addAttribute("userDto", userDto);
         return "/user/userLogin.html";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/loginSuccessful")
+    String Successful(@ModelAttribute UserDto userDto, Model model, RedirectAttributes redirectAttributes){
+        UserDto a = userService.getDetailByEmail(userDto.getEmail());
+        if(a == null){
+            model.addAttribute("emailError", "Email not registered");
+            return "/user/userLogin.html";
+        }
+        if(userDto.getPassword().compareTo("") == 0){
+            model.addAttribute("passwordError", "Please enter your password");
+            return "/user/userLogin.html";
+        }
+        if(a.getPassword().compareTo(userDto.getPassword()) != 0){
+            model.addAttribute("passwordError", "Invalid password");
+            return "/user/userLogin.html";
+        }
+        redirectAttributes.addFlashAttribute("loggedInUser", a);
+        return "redirect:/home";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/save")
@@ -46,6 +66,10 @@ public class HomeController {
         }
         if(userService.getDetailByPhone(userDto.getPhoneNumber()) != null){
             model.addAttribute("phoneError", "Phone number already exists");
+            return "/user/createUser.html";
+        }
+        if(userDto.getPassword().compareTo(userDto.getRePassword()) != 0){
+            model.addAttribute("passwordError", "Passwords do not match");
             return "/user/createUser.html";
         }
         if(userDto.getPassword().compareTo(userDto.getRePassword()) != 0){

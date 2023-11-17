@@ -9,4 +9,6 @@ import java.util.ArrayList;
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 
         UserEntity findFirstByPhoneNumber(String phoneNumber);
+
+        UserEntity findFirstByEmail(String email);
 }
