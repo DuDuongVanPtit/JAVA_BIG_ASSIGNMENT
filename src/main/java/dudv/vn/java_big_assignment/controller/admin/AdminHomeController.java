@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 @Controller
 @RequestMapping("admin")
-public class AdminHome {
+public class AdminHomeController {
     @Autowired
     UserService userService;
 
