@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel</title>
+</head>
+<body>
+<table>
+    <tr bgcolor="#808080" class="row">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Discount</th>
+        <th>Description</th>
+    </tr>
+    <tr bgcolor="#d3d3d3" th:each="service : ${listServices}" class="row">
+        <td th:text="${service.id}"></td>
+        <td th:text="${service.name}"></td>
+        <td th:text="${service.price}"></td>
+        <td th:text="${service.discount}"></td>
+        <td th:text="${service.description}"></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -160,7 +160,7 @@
             text-decoration: none;
             color: black;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 20px;
         }
         #category_container ul li a i{
             color: #4793f5;
@@ -254,23 +254,10 @@
             <div id="category">
                 <div id="category_container">
                     <ul>
-                        <li>
-                            <a href=""><i class="fa-solid fa-hotel"></i> HOTELS</a>
-                        </li>
-                        <li>
-                            <a href=""><i class="fa-solid fa-car"></i>CAR RENTAILS</a>
-                        </li>
-                        <li>
-                            <a href=""><i class="fa-solid fa-plane-departure"></i>FLIGHTS</a>
-                        </li>
-                        <li>
-                            <a href=""><i class="fa-solid fa-umbrella"></i>TRIPS</a>
-                        </li>
-                        <li>
-                            <a href=""><i class="fa-solid fa-ferry"></i>CUISES</a>
-                        </li>
-                        <li>
-                            <a href=""><i class="fa-solid fa-person-swimming"></i>ACTIVITIES</a>
+                        <li th:each="category : ${categoryList}">
+                            <a th:text="${category.name}"
+                               th:href="@{/home/category/{id}(id = ${category.id})}" href="#">
+                            </a>
                         </li>
                     </ul>
                 </div>

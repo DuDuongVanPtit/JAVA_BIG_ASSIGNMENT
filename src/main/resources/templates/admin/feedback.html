@@ -1,10 +1,176 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            margin: 0;
+            background-color: #e3e0e0;
+        }
+
+        #header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: 65px;
+            background-color: white;
+            border-bottom: 1px solid #8b8b8b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 25px;
+        }
+
+        #header h1 {
+            font-size: 30px;
+            color: #333;
+        }
+
+        #header ul {
+            display: flex;
+            width: 40%;
+            list-style: none;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #box_search {
+            display: flex;
+            align-items: center;
+            border: 1px solid #8b8b8b;
+            border-radius: 30px;
+        }
+
+        #box_search input {
+            border: none;
+            outline: none;
+            margin-left: 10px;
+            width: 80%;
+            font-size: 18px;
+        }
+
+        #header ul li a {
+            text-decoration: none;
+            font-size: 20px;
+            color: black;
+        }
+
+        #sidebar {
+            height: calc(100vh - 65px);
+            width: 250px;
+            position: sticky;
+            top: 65px;
+            button: 65px;
+            border-right: 1px solid #8b8b8b;
+        }
+
+        #sidebar_container {
+            width: 80%;
+            height: calc(100% - 40px);
+            padding: 20px 10%;
+            background-color: white;
+        }
+
+        #sidebar_container ul li {
+            margin-bottom: 20px;
+            font-size: 20px;
+            border-bottom: 1px solid black;
+        }
+
+        #sidebar_container ul li a {
+            text-decoration: none;
+            padding-left: 20px;
+            line-height: 30px;
+            color: black;
+            font-size: 18px;
+        }
+
+        #display {
+            position: absolute;
+            z-index: -1;
+            left: 251px;
+            top: 65px;
+            height: calc(100% - 65px);
+            width: calc(100% - 251px);
+            background-color: #e3e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
+<div id="header">
+    <h1>TRAVELIX</h1>
+    <ul>
+        <li>
+            <a th:href="@{/admin}" href="">
+                <i class="fa-solid fa-house"></i> HOME
+            </a>
+        </li>
+        <li style="width: 60%">
+            <div id="box_search">
+                <input type="text" placeholder="Search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+        </li>
+        <li>
+            <a href="">
+                <i class="fa-regular fa-user"></i> view as a user
+            </a>
+        </li>
+    </ul>
+    <div>
+        <a href="" style="text-decoration: none; color: black">
+            LOGOUT <i class="fa-solid fa-right-from-bracket"></i>
+        </a>
+    </div>
+</div>
 
+<div id="sidebar">
+    <div id="sidebar_container">
+        <ul>
+            <li>
+                <a href="">
+                    <i class="fa-brands fa-servicestack"></i> Service
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/admin/user}" href="">
+                    <i class="fa-solid fa-user"></i> User
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fa-solid fa-cart-plus"></i> Category
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fa-solid fa-barcode"></i> Order
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fa-solid fa-envelope"></i> FeedBack
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="display">
+    <!-- Nội dung hiển thị sẽ ở đây -->
+</div>
 </body>
 </html>

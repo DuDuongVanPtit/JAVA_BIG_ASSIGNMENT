@@ -21,6 +21,11 @@ public class AdminHomeController {
         return "/admin/adminHome.html";
     }
 
+    @RequestMapping("/category")
+    public String category(){
+        return "/admin/category.html";
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "/user")
     String listUser(Model model){
         Object list = userService.getAllUser();
