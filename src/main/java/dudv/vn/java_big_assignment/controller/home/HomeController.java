@@ -1,8 +1,11 @@
 package dudv.vn.java_big_assignment.controller.home;
 
 import dudv.vn.java_big_assignment.dto.UserDto;
+import dudv.vn.java_big_assignment.entities.CategoryEntity;
 import dudv.vn.java_big_assignment.entities.UserEntity;
 import dudv.vn.java_big_assignment.repository.UserRepository;
+import dudv.vn.java_big_assignment.service.CategoryService;
+import dudv.vn.java_big_assignment.service.ServiceService;
 import dudv.vn.java_big_assignment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,13 +19,21 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("home")
 public class HomeController {
-    @RequestMapping("")
-    public String home() {
-        return "/home/home.html";
-    }
-
     @Autowired
     UserService userService;
+
+    @Autowired
+    CategoryService categoryService;
+
+    @Autowired
+    ServiceService serviceService;
+
+    @RequestMapping(method = RequestMethod.GET, value = "")
+    public String home(Model model) {
+        Object categoryList = categoryService.getAllCategories();
+        model.addAttribute("categoryList", categoryList);
+        return "/home/home.html";
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/register")
     String registerForm(@RequestParam(required = false) String fullName, Model model){
@@ -80,4 +91,10 @@ public class HomeController {
         return "/home/home.html";
     }
 
+    @RequestMapping(method = RequestMethod.GET,value = "/category/{id}")
+    public String categoryDetails(@PathVariable Integer id ,Model model){
+        Object listServices = serviceService.getServicesByCategoryId(id);
+        model.addAttribute("listServices", listServices);
+        return "/category/services.html";
+    }
 }

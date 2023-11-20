@@ -134,12 +134,11 @@
         /*----------------------DISPLAY-----------------------------*/
         #display{
             position: absolute;
-            z-index: -1;
             left: 251px;
             top: 66px;
             height: calc(100% - 66px);
             width: calc(100% - 251px);
-            background-color: #e3e0e0;
+            background-color: white;
             display: flex;
             justify-content: center;
         }
@@ -187,19 +186,19 @@
                 <ul>
                     <li>
                         <i class="fa-brands fa-servicestack"></i>
-                        <a href="">
+                        <a th:href="@{/admin/services}" href="">
                             Service
                         </a>
                     </li>
                     <li>
                         <i class="fa-solid fa-user"></i>
-                        <a th:href="@{/admin/user}" href="">
+                        <a th:href="@{/admin/users}" href="">
                             User
                         </a>
                     </li>
                     <li>
                         <i class="fa-solid fa-cart-plus"></i>
-                        <a href="">
+                        <a th:href="@{/admin/categories}" href="">
                             Category
                         </a>
                     </li>
