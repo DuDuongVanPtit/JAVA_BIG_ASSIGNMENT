@@ -254,8 +254,8 @@
             <div id="category">
                 <div id="category_container">
                     <ul>
-                        <li th:each="category : ${categoryList}">
-                            <a th:text="${category.name}"
+                        <li th:each="category, i : ${categoryList}" th:if="${i.index ge 0 and i.index le 5}">
+                            <a th:text="${#strings.toUpperCase(category.name)}"
                                th:href="@{/home/category/{id}(id = ${category.id})}" href="#">
                             </a>
                         </li>

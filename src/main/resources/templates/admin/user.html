@@ -4,39 +4,61 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        #display table{
-            width: 70%;
-            height: fit-content;
-            margin-top: 20px;
-            font-size: 25px;
+        #display_container{
+            width: 100%;
+            background-color: palegoldenrod;
+            padding: 10px
         }
-        #display table tr td{
-            line-height: 40px;
+        #display_container h2{
+            padding-top: 20px;
+            text-align: center;
+            color: #333;
+            font-size: 30px;
+            font-weight: 600;
+        }
+
+        #display_container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #display_container table th,#display_container table td {
+            border: 1px solid #8f8f8f;
+            padding: 10px;
             text-align: center;
         }
-        #display table tr th, #display table tr td{
-            border: 1px solid #000;
-            border-collapse: collapse;
+
+        #display_container table th {
+            background-color: #f2f2f2;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 <div th:replace="fragments/adminHeader :: html"></div>
 <div id="display">
-    <table>
-        <tr bgcolor="#808080" class="row">
-            <th>FUllNAME</th>
-            <th>Email</th>
-            <th>PhoneNumber</th>
-            <th>Address</th>
-        </tr>
-        <tr bgcolor="#d3d3d3" th:each="user, iterStat : ${list}" th:if="${iterStat.index ge 0 and iterStat.index le 5}" class="row">
-            <td th:text="${user.fullName}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.phoneNumber}"></td>
-            <td th:text="${user.address}"></td>
-        </tr>
-    </table>
+    <div id="display_container">
+        <h2>List of registered customers</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>FullName</th>
+                    <th>Email</th>
+                    <th>PhoneNumber</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user, i : ${list}" th:if="${i.index ge 0 and i.index le 10}" class="row">
+                    <td th:text="${user.fullName}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.phoneNumber}"></td>
+                    <td th:text="${user.address}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>

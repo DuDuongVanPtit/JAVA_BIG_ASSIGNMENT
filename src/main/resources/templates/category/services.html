@@ -12,6 +12,7 @@
         <th>Price</th>
         <th>Discount</th>
         <th>Description</th>
+        <th>Thumbnail</th>
     </tr>
     <tr bgcolor="#d3d3d3" th:each="service : ${listServices}" class="row">
         <td th:text="${service.id}"></td>
@@ -19,7 +20,9 @@
         <td th:text="${service.price}"></td>
         <td th:text="${service.discount}"></td>
         <td th:text="${service.description}"></td>
+        <td th:text="${service.thumbnail}"></td>
     </tr>
+    <img src="/images/10/flight1.jpg" alt="">
 </table>
 </body>
 </html>
