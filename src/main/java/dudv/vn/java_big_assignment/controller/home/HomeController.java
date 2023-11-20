@@ -75,7 +75,7 @@ public class HomeController {
         if(userDto.getPassword().compareTo(userDto.getRePassword()) != 0){
             model.addAttribute("passwordError", "Passwords do not match");
             return "/user/createUser.html";
-        }
+           }
         userService.addUser(userDto);
         return "/home/home.html";
     }
