@@ -96,6 +96,10 @@
                     <div>
                         <input th:field="*{id}" type="hidden"/>
                         <div class="input_area">
+                            <label for="serviceName">Code</label>
+                            <input th:field="*{code}" type="text" id="serviceCode" name="productName" required placeholder="Type to add new category"/>
+                        </div>
+                        <div class="input_area">
                             <label for="serviceName">Name</label>
                             <input th:field="*{name}" type="text" id="serviceName" name="productName" required placeholder="Type to add new category"/>
                         </div>
@@ -146,6 +150,7 @@
                     <th>Discount</th>
                     <th>Description</th>
                     <th>Category id</th>
+                    <th>thumbnail</th>
                     <th style="width: 50px">Delete</th>
                 </tr>
                 </thead>
@@ -157,6 +162,7 @@
                     <td th:text="${service.discount} + '$'"></td>
                     <td th:text="${service.description}"></td>
                     <td th:text="${service.categoryId}"></td>
+                    <td th:text="${service.thumbnail}"></td>
                     <td>
                         <a th:href="@{/admin/service/delete/{id}(id=${service.id})}"
                            onclick="return confirm('Are you sure you want to delete this service?')">

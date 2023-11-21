@@ -56,20 +56,13 @@ public class AdminHomeController {
     @RequestMapping(method = RequestMethod.POST, value = "/service/add")
     public String addService(@ModelAttribute ServiceDto serviceDto, @RequestParam("image")MultipartFile multipartFile) throws IOException {
         if(!multipartFile.isEmpty()){
+            serviceService.addService(serviceDto);
             String tmp = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             System.out.println(serviceDto.getId());
-            String fileName = (""+serviceDto.getId()) + tmp.substring(tmp.lastIndexOf("."));
+            String fileName = (serviceDto.getCode() + serviceDto.getId()) + tmp.substring(tmp.lastIndexOf("."));
             serviceDto.setThumbnail(fileName);
-            ServiceDto saveService = serviceService.addService(serviceDto);
             String upload = Paths.get("src", "main", "resources", "static", "images").toString();
-
             FileUploadUtil.saveFile(upload, fileName, multipartFile);
-        }
-        else{
-            if(serviceDto.getThumbnail().isEmpty()){
-                serviceDto.setThumbnail(null);
-                serviceService.addService(serviceDto);
-            }
         }
         serviceService.addService(serviceDto);
         return "redirect:/admin/services";

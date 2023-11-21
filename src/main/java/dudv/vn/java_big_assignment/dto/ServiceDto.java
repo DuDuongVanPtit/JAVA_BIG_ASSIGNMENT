@@ -9,6 +9,7 @@ public class ServiceDto {
     public ServiceDto(){}
 
     private Integer id;
+    private String code;
     private String name;
     private Integer price;
     private Integer discount;

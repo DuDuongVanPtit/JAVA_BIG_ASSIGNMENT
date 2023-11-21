@@ -14,6 +14,10 @@ public class ServiceEntity {
     private Integer id;
 
     @Basic
+    @Column(name = "code", nullable = false, length = 350)
+    private String code;
+
+    @Basic
     @Column(name = "title", nullable = false, length = 350)
     private String name;
 

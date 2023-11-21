@@ -86,13 +86,13 @@ public class HomeController {
         if(userDto.getPassword().compareTo(userDto.getRePassword()) != 0){
             model.addAttribute("passwordError", "Passwords do not match");
             return "/user/createUser.html";
-           }
+        }
         userService.addUser(userDto);
         return "/home/home.html";
     }
 
     @RequestMapping(method = RequestMethod.GET,value = "/category/{id}")
-    public String categoryDetails(@PathVariable Integer id ,Model model){
+    public String categoryDetails(@PathVariable Integer id,Model model){
         Object listServices = serviceService.getServicesByCategoryId(id);
         model.addAttribute("listServices", listServices);
         return "/category/services.html";
