@@ -38,7 +38,7 @@
             <div id="avatar">
 
             </div>
-            <h1 id="hello">HELLO ADMIN</h1>
+            <h1 th:text="'HELLO ' + ${#authentication.name}" id="hello"></h1>
 
             <div id="text">
                 <h1>WELCOME TO</h1>

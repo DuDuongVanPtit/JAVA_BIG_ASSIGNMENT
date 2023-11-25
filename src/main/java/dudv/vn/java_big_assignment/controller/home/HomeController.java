@@ -5,6 +5,7 @@ import dudv.vn.java_big_assignment.entities.CategoryEntity;
 import dudv.vn.java_big_assignment.entities.UserEntity;
 import dudv.vn.java_big_assignment.repository.UserRepository;
 import dudv.vn.java_big_assignment.service.CategoryService;
+import dudv.vn.java_big_assignment.service.RoleService;
 import dudv.vn.java_big_assignment.service.ServiceService;
 import dudv.vn.java_big_assignment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,12 @@ import javax.validation.Valid;
 public class HomeController {
     @Autowired
     UserService userService;
-
     @Autowired
     CategoryService categoryService;
-
     @Autowired
     ServiceService serviceService;
+    @Autowired
+    RoleService roleService;
 
     @RequestMapping(method = RequestMethod.GET, value = "")
     public String home(Model model) {
@@ -38,34 +39,10 @@ public class HomeController {
     @RequestMapping(method = RequestMethod.GET, value = "/register")
     String registerForm(@RequestParam(required = false) String fullName, Model model){
         UserDto userDto = new UserDto();
+        Object roleList = roleService.getAllRoles();
         model.addAttribute("userDto", userDto);
+        model.addAttribute("roleList", roleList);
         return "/user/createUser.html";
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/login")
-    String loginForm(@RequestParam(required = false) String fullName, Model model){
-        UserDto userDto = new UserDto();
-        model.addAttribute("userDto", userDto);
-        return "/user/userLogin.html";
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/loginSuccessful")
-    String Successful(@ModelAttribute UserDto userDto, Model model, RedirectAttributes redirectAttributes){
-        UserDto a = userService.getDetailByEmail(userDto.getEmail());
-        if(a == null){
-            model.addAttribute("emailError", "Email not registered");
-            return "/user/userLogin.html";
-        }
-        if(userDto.getPassword().compareTo("") == 0){
-            model.addAttribute("passwordError", "Please enter your password");
-            return "/user/userLogin.html";
-        }
-        if(a.getPassword().compareTo(userDto.getPassword()) != 0){
-            model.addAttribute("passwordError", "Invalid password");
-            return "/user/userLogin.html";
-        }
-        redirectAttributes.addFlashAttribute("loggedInUser", a);
-        return "redirect:/home";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/save")
@@ -91,9 +68,53 @@ public class HomeController {
         return "/home/home.html";
     }
 
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("error", false);
+        return "/user/userLogin.html";
+    }
+    @PostMapping("/doLogin")
+    public String doLogin(@RequestParam String email, @RequestParam String password, Model model) {
+        boolean isAuthenticated = userService.authenticate(email, password);
+
+        if (isAuthenticated) {
+            return "redirect:/home";
+        } else {
+            model.addAttribute("error", true);
+            return "/user/userLogin.html";
+        }
+    }
+//    @RequestMapping(method = RequestMethod.GET, value = "/login")
+//    String loginForm(@RequestParam(required = false) String fullName, Model model){
+//        UserDto userDto = new UserDto();
+//        model.addAttribute("userDto", userDto);
+//        return "/user/userLogin.html";
+//    }
+
+//    @RequestMapping(method = RequestMethod.POST, value = "/loginSuccessful")
+//    String Successful(@ModelAttribute UserDto userDto, Model model, RedirectAttributes redirectAttributes){
+//        UserDto a = userService.getDetailByEmail(userDto.getEmail());
+//        if(a == null){
+//            model.addAttribute("emailError", "Email not registered");
+//            return "/user/userLogin.html";
+//        }
+//        if(userDto.getPassword().compareTo("") == 0){
+//            model.addAttribute("passwordError", "Please enter your password");
+//            return "/user/userLogin.html";
+//        }
+//        if(a.getPassword().compareTo(userDto.getPassword()) != 0){
+//            model.addAttribute("passwordError", "Invalid password");
+//            return "/user/userLogin.html";
+//        }
+//        redirectAttributes.addFlashAttribute("loggedInUser", a);
+//        return "redirect:/home";
+//    }
+
+
     @RequestMapping(method = RequestMethod.GET,value = "/category/{id}")
     public String categoryDetails(@PathVariable Integer id,Model model){
         Object listServices = serviceService.getServicesByCategoryId(id);
+        model.addAttribute("categoryId", id);
         model.addAttribute("listServices", listServices);
         return "/category/services.html";
     }

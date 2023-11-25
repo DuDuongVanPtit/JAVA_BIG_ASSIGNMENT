@@ -25,4 +25,6 @@ public class UserDto {
 
     @NotBlank(message = "RePassword is required")
     private String rePassword;
+
+    private String roleId;
 }

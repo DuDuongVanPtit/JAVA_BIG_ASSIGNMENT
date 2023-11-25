@@ -132,26 +132,16 @@
                     </div>
                     <header> MEMBER LOGIN </header>
 
-                    <form th:action="@{/home/loginSuccessful}" method="post" th:object="${userDto}" class="login_box-form">
-
+                    <form form th:action="@{/doLogin}" method="post" class="login_box-form">
+                        <div th:if="${error}" style="color: red;">Login failed. Please try again.</div>
                         <div class="input_box">
                             <label>Login info <i class="fa-solid fa-asterisk" style="color: #d51a1a; position: relative; font-size: 8px; top: -4px; left: -3px"></i></label>
-                            <input th:field="*{email}" type="text" placeholder="Enter your email or phone number" />
-                            <div class="errors_alert">
-                            </div>
-                            <div class="errors_alert" style="height: 0px;">
-                                <label th:text="${emailError}" style="top: -15px"></label>
-                            </div>
+                            <input type="text" name="email" placeholder="Enter your email or phone number" />
                         </div>
 
                         <div class="input_box">
                             <label>Password <i class="fa-solid fa-asterisk" style="color: #d51a1a; position: relative; font-size: 8px; top: -4px; left: -3px"></i></label>
-                            <input th:field="*{password}" type="password" placeholder="Enter your password"/>
-                            <div class="errors_alert">
-                            </div>
-                            <div class="errors_alert" style="height: 0px;">
-                                <label th:text="${passwordError}" style="top: -15px"></label>
-                            </div>
+                            <input type="password" name="password" placeholder="Enter your password"/>
                         </div>
 
                         <div class="for_register">

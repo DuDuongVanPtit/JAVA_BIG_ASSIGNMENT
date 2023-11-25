@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Hotel</title>
+    <title>Services</title>
     <style>
         *{
             ont-family: 'Roboto',Helvetica,Arial,sans-serif;
@@ -54,19 +54,59 @@
             font-family: Arial, Helvetica, sans-serif;
         }
         #slider{
+            margin-top: -80px;
             width: 100%;
-            height: 400px;
-            background-color: #8b8b8b;
+            height: 700px;
+            margin-bottom: 10px;
+        }
+        #sliderHotel_container{
+            background-image: url("/images/hotelSlider1.jpg");
+            height: 100%;
+            width: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        #sliderCar_container{
+            background-image: url("/images/carSlider.jpg");
+            height: 100%;
+            width: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        #sliderFlight_container{
+            background-image: url("/images/flightSlider2.jpg");
+            height: 100%;
+            width: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        #sliderTrip_container{
+            background-image: url("/images/tripSlider1.jpg");
+            height: 100%;
+            width: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        #slider div{
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            font-size: 100px;
+            line-height: 700px;
+            color: white;
+            font-weight: 600;
+            text-shadow:
+                    -8px -1px 0 #000,
+                    1px -1px 0 #000,
+                    -1px  1px 0 #000,
+                    1px  1px 0 #000;
         }
         #content{
             width: 100%;
             height: 100%;
-            background-color: rebeccapurple;
         }
         #content_container{
             width: 1200px;
             height: 100%;
-            background-color: #fdbaba;
             margin: 0 auto;
         }
         .services_content{
@@ -80,48 +120,143 @@
             width: 30%;
             height: 100%;
         }
+        .service_thumbnail .content_name{
+            height: 10%;
+            padding-bottom: 5px;
+        }
+        .service_thumbnail .content_name div{
+            border-radius: 10px;
+            background-color: #fa9e1b;
+            color: white;
+            font-weight: 600;
+            padding: 0 20px;
+            width: fit-content;
+            height: 100%;
+            line-height: 25px;
+            margin: 0 auto;
+        }
         .service_description{
+            padding-top: 10px;
+            padding-left: 20px;
             width: 70%;
             height: 100%;
         }
-
-
+        .service_description .price_area{
+            display: flex;
+            justify-content: flex-start;
+            width: 100%;
+            height: calc(30% - 10px);
+            padding-bottom: 10px;
+        }
+        .service_description .price_area span{
+            color: #929191;
+            font-family: emoji;
+            line-height: 30px;
+            padding-left: 10px;
+            height: 30px;
+            font-size: 22px;
+        }
+        .service_description .price_area li{
+            font-family: emoji;
+        }
+        .service_description .description_area{
+            height: calc(50% - 10px);
+            padding-bottom: 10px;
+        }
+        .service_description .description_area h3{
+            max-height: 90%;
+            font-family: math;
+            font-size: 18px;
+            text-align: justify;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .service_description .book_area{
+            height: 20%;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .service_description .book_area .book_btn{
+            text-align: center;
+            background-color: #350a4e;
+            border-radius: 18px;
+            width: 18%;
+            height: 70%;
+        }
+        .service_description .book_area .book_btn a{
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            line-height: 35px;
+        }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 </head>
 <body>
-<!--<img src="/images/22.png" alt="">-->
-<!--<table>-->
-<!--    <tr bgcolor="#808080" class="row">-->
-<!--        <th>ID</th>-->
-<!--        <th>Name</th>-->
-<!--        <th>Price</th>-->
-<!--        <th>Discount</th>-->
-<!--        <th>Description</th>-->
-<!--        <th>Thumbnail</th>-->
-<!--    </tr>-->
-<!--    <tr bgcolor="#d3d3d3" th:each="service : ${listServices}" class="row">-->
-<!--        <td th:text="${service.id}"></td>-->
-<!--        <td th:text="${service.name}"></td>-->
-<!--        <td th:text="${service.price}"></td>-->
-<!--        <td th:text="${service.discount}"></td>-->
-<!--        <td th:text="${service.description}"></td>-->
-<!--        <td th:text="${service.thumbnail}"></td>-->
-<!--    </tr>-->
-<!--</table>-->
+    <div th:replace="fragments/header :: html"></div>
     <div id="slider">
+        <div th:if="${categoryId eq 1}" id="sliderHotel_container">
+            <h1>Hotels</h1>
+        </div>
+        <div th:if="${categoryId eq 2}" id="sliderCar_container">
+            <h1>Car Rentals</h1>
+        </div>
+        <div th:if="${categoryId eq 3}" id="sliderFlight_container">
+            <h1>Flights</h1>
+        </div>
+        <div th:if="${categoryId eq 4}" id="sliderTrip_container">
+            <h1>Trips</h1>
+        </div>
     </div>
     <div id="content">
         <div id="content_container">
             <div th:each="service : ${listServices}" class="services_content">
                 <div class="service_thumbnail">
-                    <img th:src="${'/images/' + service.thumbnail}" style="width: 100%; height: 100%" alt="">
+                    <div class="content_name">
+                        <div th:text="${service.name}"></div>
+                    </div>
+                    <img th:src="${'/images/' + service.thumbnail}" style="width: 100%; height: 80%; border-radius: 20px" alt="">
                 </div>
                 <div class="service_description">
-                    <a th:text="${service.name}" style="color: white" href="#"></a>
-                    <a th:text="${service.thumbnail}" style="color: white" href="#"></a>
+                    <div class="price_area">
+                        <ul>
+                            <li style="padding-bottom: 10px; font-size: 30px; color: #eda84a; font-weight: 600" th:text="${'$' + (service.price - service.discount)}"></li>
+                            <li th:if="${service.discount > 0}" style="text-decoration: line-through; font-size: 20px; color: #777777" th:text="${'$' + service.price}"></li>
+                        </ul>
+                        <span th:if="${service.categoryId eq 1}">per night</span>
+                    </div>
+                    <div class="description_area">
+                        <h3 th:if="${#strings.length(service.description) > 400}" th:utext="${#strings.substring(service.description, 0, 400) + ' ...'}"></h3>
+                        <h3 th:unless="${#strings.length(service.description) > 400}" th:text="${service.description}"></h3>
+                    </div>
+                    <div class="book_area">
+                        <div class="book_btn">
+                            <a href="#">BOOK NOW</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function toggleDescription() {
+            var description = document.getElementById('productDescription');
+            var showMoreSpan = description.querySelector('.show-more');
+            var showMoreButton = document.querySelector('.show-more-button');
+
+            if (description.style.maxHeight) {
+                description.style.maxHeight = null;
+                showMoreSpan.style.display = 'inline';
+                showMoreButton.innerHTML = 'Read more...';
+            } else {
+                description.style.maxHeight = '100%';
+                showMoreSpan.style.display = 'none';
+                showMoreButton.innerHTML = 'Read less';
+            }
+        }
+    </script>
 </body>
 </html>

@@ -136,7 +136,7 @@
                         <div class="errors_alert">
                             <label th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></label>
                         </div>
-                        <div class="errors_alert" style="height: 0px;">
+                        <div class="errors_alert" style="height: 0px">
                             <label th:text="${phoneError}" style="top: -15px"></label>
                         </div>
                     </div>
@@ -160,9 +160,19 @@
                         <div class="errors_alert">
                             <label th:if="${#fields.hasErrors('rePassword')}" th:errors="*{rePassword}"></label>
                         </div>
-                        <div class="errors_alert">
+                        <div class="errors_alert" style="height: 0px">
                             <label th:text="${passwordError}" style="top: -15px"></label>
                         </div>
+                    </div>
+
+                    <div class="input_box" style="display: flex; justify-content: flex-start">
+                        <h2 style="padding-right: 20px">Role</h2>
+                        <select th:field="*{roleId}">
+                            <option th:each="role : ${roleList}"
+                                    th:text="${role.id + ':' + role.name}"
+                                    th:value="${role.id}">
+                            </option>
+                        </select>
                     </div>
 
                     <button type="submit">Register Now</button>

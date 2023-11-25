@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <meta charset="UTF-8">
         <title>Travelix</title>
@@ -116,6 +116,10 @@
                 text-decoration: none;
                 color: white;
                 line-height: 40px;
+                transition: background-color 0.5s;
+            }
+            #taskbar_controller li a:hover{
+                border-bottom: 2px solid #ff8c8c;
             }
         </style>
         <link rel="stylesheet"
@@ -151,13 +155,24 @@
                 </ul>
                 <ul id="header_top-right">
                     <li>
-                        <a th:href="@{/home/login}" href="">
+                        <a th:if="${#authentication.principal == 'anonymousUser'}" th:href="@{/home/login}" href="">
                             LOGIN
+                        </a>
+                        <a th:if="${#authentication.principal != 'anonymousUser'}">
+                            <span sec:authentication="principal.fullName"></span>
+                        </a>
+                    </li>
+                    <li th:if="${#authentication.principal != 'anonymousUser'}">
+                        <a href="#">
+                            <i class="fa-solid fa-rectangle-list"></i>
                         </a>
                     </li>
                     <li>
-                        <a th:href="@{/home/register}">
+                        <a th:if="${#authentication.principal == 'anonymousUser'}" th:href="@{/home/register}">
                             REGISTER
+                        </a>
+                        <a th:if="${#authentication.principal != 'anonymousUser'}" th:href="@{/logout}">
+                            LOGOUT <i class="fa-solid fa-right-from-bracket"></i>
                         </a>
                     </li>
                 </ul>
@@ -165,9 +180,9 @@
         </div>
         <div id="taskbar">
             <div id="taskbar_container">
-                <div style="line-height: 40px; font-size: 25px; font-weight: 700; color: white">
+                <div style="line-height: 40px; font-size: 25px; font-weight: 700; color: white; text-decoration: none">
                     <i class="fa-solid fa-earth-americas fa-spin" style="margin-right: 7px"></i>
-                    TRAVELIX
+                    <a style="line-height: 40px; font-size: 25px; font-weight: 700; color: white; text-decoration: none" th:href="@{/home}">TRAVELIX</a>
                 </div>
                 <ul id="taskbar_controller">
                     <li>

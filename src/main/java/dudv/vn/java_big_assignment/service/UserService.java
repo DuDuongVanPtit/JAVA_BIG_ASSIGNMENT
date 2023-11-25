@@ -6,6 +6,7 @@ import dudv.vn.java_big_assignment.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,6 +17,9 @@ import java.util.ArrayList;
 public class UserService {
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public ArrayList<UserEntity> getAllUser(){
         ArrayList<UserEntity> ans = ((ArrayList<UserEntity>) userRepository.findAll());
@@ -50,6 +54,7 @@ public class UserService {
     public UserDto addUser(UserDto userDto){
         UserEntity userEntity = new UserEntity();
         BeanUtils.copyProperties(userDto, userEntity);
+        userEntity.setPassword(passwordEncoder.encode(userDto.getPassword()));
         userRepository.save(userEntity);
         userDto.setId(userEntity.getId());
         return userDto;
@@ -62,4 +67,8 @@ public class UserService {
         return userDto;
     }
 
+    public boolean authenticate(String email, String password) {
+        UserEntity userEntity = userRepository.findFirstByEmail(email);
+        return userEntity != null && passwordEncoder.matches(password, userEntity.getPassword());
+    }
 }

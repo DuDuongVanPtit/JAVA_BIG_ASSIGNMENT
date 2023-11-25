@@ -16,11 +16,16 @@
             font-size: 30px;
             font-weight: 600;
         }
-
+        #display_container #table_container{
+            max-height: 770px;
+            overflow-y: auto;
+            margin-top: 10px;
+            border: 1px solid black;
+            margin-top: 20px;
+        }
         #display_container table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
         }
 
         #display_container table th,#display_container table td {
@@ -40,24 +45,26 @@
 <div id="display">
     <div id="display_container">
         <h2>List of registered customers</h2>
-        <table>
-            <thead>
+        <div id="table_container">
+            <table>
+                <thead>
                 <tr>
                     <th>FullName</th>
                     <th>Email</th>
                     <th>PhoneNumber</th>
                     <th>Address</th>
                 </tr>
-            </thead>
-            <tbody>
-                <tr th:each="user, i : ${list}" th:if="${i.index ge 0 and i.index le 10}" class="row">
+                </thead>
+                <tbody>
+                <tr th:each="user : ${list}" class="row">
                     <td th:text="${user.fullName}"></td>
                     <td th:text="${user.email}"></td>
                     <td th:text="${user.phoneNumber}"></td>
                     <td th:text="${user.address}"></td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 </body>
