@@ -169,13 +169,13 @@
                 </li>
                 <li>
                     <i class="fa-regular fa-user" style="line-height: 65px; font-size: 20px"></i>
-                    <a href="">
+                    <a th:href="@{/home}">
                         view as a user
                     </a>
                 </li>
             </ul>
             <div>
-                <a href="" style="line-height: 65px; padding-right: 25px; text-decoration: none; color: black">
+                <a th:href="@{/logout}" style="line-height: 65px; padding-right: 25px; text-decoration: none; color: black">
                     LOGOUT <i class="fa-solid fa-right-from-bracket"></i>
                 </a>
             </div>
@@ -198,14 +198,14 @@
                     </li>
                     <li>
                         <i class="fa-solid fa-cart-plus"></i>
-                        <a th:href="@{/admin/categories}" href="">
+                        <a th:href="@{/admin/categories}">
                             Category
                         </a>
                     </li>
                     <li>
                         <i class="fa-solid fa-barcode"></i>
-                        <a href="">
-                            Order
+                        <a th:href="@{/admin/booking}">
+                            Booking
                         </a>
                     </li>
                     <li>

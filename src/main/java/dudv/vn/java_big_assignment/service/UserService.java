@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -32,6 +33,18 @@ public class UserService {
     public UserDto getDetailByPhone(String phoneNumber){
         UserDto userDto = new UserDto();
         UserEntity userEntity = userRepository.findFirstByPhoneNumber(phoneNumber);
+        if(userDto != null && userEntity != null){
+            BeanUtils.copyProperties(userEntity, userDto);
+            return userDto;
+        }
+        else{
+            return null;
+        }
+    }
+
+    public UserDto getDetailById(Integer id){
+        UserDto userDto = new UserDto();
+        UserEntity userEntity = userRepository.findFirstById(id);
         if(userDto != null && userEntity != null){
             BeanUtils.copyProperties(userEntity, userDto);
             return userDto;
@@ -71,4 +84,5 @@ public class UserService {
         UserEntity userEntity = userRepository.findFirstByEmail(email);
         return userEntity != null && passwordEncoder.matches(password, userEntity.getPassword());
     }
+
 }

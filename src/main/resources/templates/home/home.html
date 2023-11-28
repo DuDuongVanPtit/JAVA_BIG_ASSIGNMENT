@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Travelix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
     <style>
         #slider{
             position: relative;
@@ -72,15 +80,44 @@
             color: #4793f5;
             padding-right: 7px;
         }
+        /*-----------------------CONTENT----------------------------------*/
+        #content{
+            width: 100%;
+            height: 2000px;
+        }
+        #content #content_container{
+            width: 1200px;
+            height: 100%;
+            margin: 0 auto;
+        }
+        #content_container #best_tour{
+            height: 400px;
+            width: 100%;
+        }
+        #best_tour #best_tour-title{
+            height: 30%;
+            width: 100%;
+            text-align: center;
+        }
+        #best_tour #best_tour-detail{
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            height: 70%;
+        }
+        .best_tour-detail--service_container{
+            height: 100%;
+            width: 30%;
+        }
+        .best_tour-detail--service{
+            background-image: url("/images/slider1.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100%;
+            width: 100%;
+        }
+
     </style>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"
-    />
 </head>
 <body>
     <!-- ------------------HEADER------------------ -->
@@ -99,6 +136,61 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="content">
+        <div id="content_container">
+            <div id="best_tour">
+                <div id="best_tour-title">
+                    <h1 style="font-size: 40px; font-weight: 600">Best room deals this week</h1>
+                </div>
+                <div id="best_tour-detail">
+                    <div class="best_tour-detail--service_container"
+                         th:each="bestTour, i : ${bestTourList}"
+                         th:if="${i.index ge 0 and i.index le 2}">
+                        <div th:style="'background-image: url(' + '/images/' + ${bestTour.thumbnail} + ');' +
+                                       'height: 100%; width: 100%; background-size: cover; background-repeat: no-repeat;' +
+                                       'border-radius: 10px;' +
+                                       'text-align: center'
+                                      ">
+                            <!--          title              -->
+                            <div style="width: fit-content; height: calc(20% - 10px); margin: 0 auto; text-align: center; padding-top: 10px">
+                                <h3 style="background-color: #fa9e1b; font-size: 20px; border-radius: 10px; padding: 0 10px"
+                                    th:if="${#strings.length(bestTour.name) > 30}"
+                                    th:text="${#strings.substring(bestTour.name, 0, 30) + ' ...'}">
+                                </h3>
+                                <h3 style="background-color: #fa9e1b; font-size: 20px; border-radius: 10px; padding: 0 10px"
+                                    th:unless="${#strings.length(bestTour.name) > 30}"
+                                    th:text="${bestTour.name}">
+                                </h3>
+                            </div>
+                            <!--       total money           -->
+                             <div style="width: 100%; height: 60%;">
+                                <div style="width: 50%; height: 50%; margin: auto; padding-top: 45px; display: flex">
+                                    <ul>
+                                        <li style="padding-bottom: 10px; font-size: 30px; color: #eda84a; font-weight: 600" th:text="${'$' + (bestTour.price - bestTour.discount)}"></li>
+                                        <li th:if="${bestTour.discount > 0}"
+                                            style="text-decoration: line-through; font-size: 20px; color: white"
+                                            th:text="${'$' + bestTour.price}"></li>
+                                    </ul>
+                                    <h3 style="line-height: 84px; padding-left: 20px; font-size: 30px; color: red"
+                                        th:if="${bestTour.discount > 0}"
+                                        th:text="${'- ' + bestTour.discount + '$'}"></h3>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="best_room">
+
+            </div>
+
+            <div id="trending">
+
             </div>
         </div>
     </div>

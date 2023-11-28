@@ -1,11 +1,13 @@
 package dudv.vn.java_big_assignment.entities;
 
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
-
+import javax.persistence.*;
+import java.util.Date;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,7 +15,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "user")
+@Table(name = "USER")
 public class UserEntity implements UserDetails {
     @Id
     @Column(name = "id", nullable = false)
@@ -40,12 +42,13 @@ public class UserEntity implements UserDetails {
     @Column(name = "password", nullable = false, length = 200)
     private String password;
 
-    @Basic
-    @Column(name = "created_at", nullable = false, length = 50)
-    private String createdAt;
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Date createdAt;
 
     @Basic
-    @Column(name = "role_id", nullable = false, length = 50)
+    @Column(name = "role_id", nullable = false)
     private Integer roleId;
 
     @Override

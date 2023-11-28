@@ -1,20 +1,16 @@
 package dudv.vn.java_big_assignment.controller.home;
 
+import dudv.vn.java_big_assignment.dto.BookingDto;
+import dudv.vn.java_big_assignment.dto.ServiceDto;
 import dudv.vn.java_big_assignment.dto.UserDto;
-import dudv.vn.java_big_assignment.entities.CategoryEntity;
-import dudv.vn.java_big_assignment.entities.UserEntity;
-import dudv.vn.java_big_assignment.repository.UserRepository;
-import dudv.vn.java_big_assignment.service.CategoryService;
-import dudv.vn.java_big_assignment.service.RoleService;
-import dudv.vn.java_big_assignment.service.ServiceService;
-import dudv.vn.java_big_assignment.service.UserService;
+import dudv.vn.java_big_assignment.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -28,11 +24,15 @@ public class HomeController {
     ServiceService serviceService;
     @Autowired
     RoleService roleService;
+    @Autowired
+    BookingService bookingService;
 
     @RequestMapping(method = RequestMethod.GET, value = "")
     public String home(Model model) {
         Object categoryList = categoryService.getAllCategories();
         model.addAttribute("categoryList", categoryList);
+        Object bestTourList = serviceService.getServicesByCategoryId(4);
+        model.addAttribute("bestTourList", bestTourList);
         return "/home/home.html";
     }
 
@@ -44,10 +44,9 @@ public class HomeController {
         model.addAttribute("roleList", roleList);
         return "/user/createUser.html";
     }
-
     @RequestMapping(method = RequestMethod.POST, value = "/save")
-    String register(@Valid @ModelAttribute UserDto userDto,BindingResult bindingResult, Model model, RedirectAttributes
-            redirectAttributes){
+    String register(@Valid @ModelAttribute UserDto userDto,BindingResult bindingResult,
+                    Model model, RedirectAttributes redirectAttributes){
         if(bindingResult.hasErrors()){
             System.out.println("lỗi nhập vào");
             return "/user/createUser.html";
@@ -65,7 +64,7 @@ public class HomeController {
             return "/user/createUser.html";
         }
         userService.addUser(userDto);
-        return "/home/home.html";
+        return "redirect:/home/login";
     }
 
     @GetMapping("/login")
@@ -74,9 +73,10 @@ public class HomeController {
         return "/user/userLogin.html";
     }
     @PostMapping("/doLogin")
-    public String doLogin(@RequestParam String email, @RequestParam String password, Model model) {
+    public String doLogin(@RequestParam String email, @RequestParam String password,
+                          Model model) {
         boolean isAuthenticated = userService.authenticate(email, password);
-
+        UserDto userDto = userService.getDetailByEmail(email);
         if (isAuthenticated) {
             return "redirect:/home";
         } else {
@@ -84,32 +84,6 @@ public class HomeController {
             return "/user/userLogin.html";
         }
     }
-//    @RequestMapping(method = RequestMethod.GET, value = "/login")
-//    String loginForm(@RequestParam(required = false) String fullName, Model model){
-//        UserDto userDto = new UserDto();
-//        model.addAttribute("userDto", userDto);
-//        return "/user/userLogin.html";
-//    }
-
-//    @RequestMapping(method = RequestMethod.POST, value = "/loginSuccessful")
-//    String Successful(@ModelAttribute UserDto userDto, Model model, RedirectAttributes redirectAttributes){
-//        UserDto a = userService.getDetailByEmail(userDto.getEmail());
-//        if(a == null){
-//            model.addAttribute("emailError", "Email not registered");
-//            return "/user/userLogin.html";
-//        }
-//        if(userDto.getPassword().compareTo("") == 0){
-//            model.addAttribute("passwordError", "Please enter your password");
-//            return "/user/userLogin.html";
-//        }
-//        if(a.getPassword().compareTo(userDto.getPassword()) != 0){
-//            model.addAttribute("passwordError", "Invalid password");
-//            return "/user/userLogin.html";
-//        }
-//        redirectAttributes.addFlashAttribute("loggedInUser", a);
-//        return "redirect:/home";
-//    }
-
 
     @RequestMapping(method = RequestMethod.GET,value = "/category/{id}")
     public String categoryDetails(@PathVariable Integer id,Model model){
@@ -118,4 +92,38 @@ public class HomeController {
         model.addAttribute("listServices", listServices);
         return "/category/services.html";
     }
+
+    @RequestMapping( "/booking")
+    public String reDirect() {
+        return "redirect:/home";
+    }
+
+    @RequestMapping(method = RequestMethod.GET,value = "/booking/bookingList/{userId}")
+    public String bookingList(@PathVariable Integer userId,Model model){
+        Object bookingList = bookingService.getAllBookingByUserId(userId);
+        model.addAttribute("bookingList", bookingList);
+        return "/booking/bookingList.html";
+    }
+
+    @RequestMapping(method = RequestMethod.GET,
+                    value = "/{categoryId}/services/booking/{userId}/{serviceId}")
+    public String addBooking(@PathVariable Integer userId,
+                           @PathVariable Integer serviceId,
+                           @PathVariable Integer categoryId ,Model model,
+                             RedirectAttributes redirectAttributes){
+        ServiceDto serviceDto = serviceService.getServiceById(serviceId);
+        UserDto userDto = userService.getDetailById(userId);
+        bookingService.addBooking(
+                userDto.getFullName(),
+                userDto.getEmail(),
+                userDto.getPhoneNumber(),
+                userDto.getAddress(),
+                serviceDto.getName(),
+                serviceDto.getThumbnail(),
+                (serviceDto.getPrice() - serviceDto.getDiscount()),
+                userDto.getId()
+        );
+        return "redirect:/home/category/" + categoryId;
+    }
+
 }

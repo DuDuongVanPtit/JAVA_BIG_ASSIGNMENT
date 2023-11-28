@@ -1,8 +1,6 @@
 package dudv.vn.java_big_assignment.service;
 
-import dudv.vn.java_big_assignment.dto.CategoryDto;
 import dudv.vn.java_big_assignment.dto.ServiceDto;
-import dudv.vn.java_big_assignment.entities.CategoryEntity;
 import dudv.vn.java_big_assignment.entities.ServiceEntity;
 import dudv.vn.java_big_assignment.repository.ServiceRepository;
 import org.springframework.beans.BeanUtils;
@@ -24,6 +22,18 @@ public class ServiceService {
 
     public ArrayList<ServiceEntity> getServicesByCategoryId(Integer categoryId){
         return (ArrayList<ServiceEntity>) serviceRepository.findAllByCategoryId(categoryId);
+    }
+
+    public ServiceDto getServiceById(Integer id){
+        ServiceDto serviceDto = new ServiceDto();
+        ServiceEntity serviceEntity = serviceRepository.findFirstById(id);
+        if(serviceDto != null && serviceEntity != null){
+            BeanUtils.copyProperties(serviceEntity, serviceDto);
+            return serviceDto;
+        }
+        else{
+            return null;
+        }
     }
     public ServiceDto addService(ServiceDto serviceDto){
         ServiceEntity serviceEntity = new ServiceEntity();

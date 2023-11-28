@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
@@ -38,7 +38,7 @@
             <div id="avatar">
 
             </div>
-            <h1 th:text="'HELLO ' + ${#authentication.name}" id="hello"></h1>
+            <h1 sec:authentication="principal.fullName" id="hello"></h1>
 
             <div id="text">
                 <h1>WELCOME TO</h1>

@@ -2,6 +2,7 @@ package dudv.vn.java_big_assignment.controller.admin;
 
 import dudv.vn.java_big_assignment.dto.CategoryDto;
 import dudv.vn.java_big_assignment.dto.ServiceDto;
+import dudv.vn.java_big_assignment.service.BookingService;
 import dudv.vn.java_big_assignment.service.CategoryService;
 import dudv.vn.java_big_assignment.service.ServiceService;
 import dudv.vn.java_big_assignment.service.UserService;
@@ -10,12 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Paths;
 
@@ -31,13 +30,16 @@ public class AdminHomeController {
     @Autowired
     ServiceService serviceService;
 
+    @Autowired
+    BookingService bookingService;
+
     @RequestMapping("")
     public String home(){
         return "/admin/adminHome.html";
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/users")
-    String listUser(Model model){
+    String userList(Model model){
         Object list = userService.getAllUser();
         model.addAttribute("list", list);
         return "/admin/user.html";
@@ -98,5 +100,12 @@ public class AdminHomeController {
     public String deleteCategory(@PathVariable Integer id){
         categoryService.deleteCategory(id);
         return "redirect:/admin/categories";
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/booking")
+    String bookingList(Model model){
+        Object bookingList = bookingService.getAllBooking();
+        model.addAttribute("bookingList", bookingList);
+        return "/admin/booking.html";
     }
 }

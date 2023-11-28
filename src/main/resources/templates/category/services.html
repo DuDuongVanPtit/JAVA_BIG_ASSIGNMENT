@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Services</title>
@@ -195,7 +195,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div th:replace="fragments/header :: html"></div>
+    <div th:replace="fragments/header :: html" th:with="pageTitle='Your Page'"></div>
     <div id="slider">
         <div th:if="${categoryId eq 1}" id="sliderHotel_container">
             <h1>Hotels</h1>
@@ -223,17 +223,35 @@
                     <div class="price_area">
                         <ul>
                             <li style="padding-bottom: 10px; font-size: 30px; color: #eda84a; font-weight: 600" th:text="${'$' + (service.price - service.discount)}"></li>
-                            <li th:if="${service.discount > 0}" style="text-decoration: line-through; font-size: 20px; color: #777777" th:text="${'$' + service.price}"></li>
+                            <li th:if="${service.discount > 0}"
+                                style="text-decoration: line-through; font-size: 20px; color: #777777"
+                                th:text="${'$' + service.price}"></li>
                         </ul>
                         <span th:if="${service.categoryId eq 1}">per night</span>
                     </div>
                     <div class="description_area">
-                        <h3 th:if="${#strings.length(service.description) > 400}" th:utext="${#strings.substring(service.description, 0, 400) + ' ...'}"></h3>
-                        <h3 th:unless="${#strings.length(service.description) > 400}" th:text="${service.description}"></h3>
+                        <h3 th:if="${#strings.length(service.description) > 400}"
+                            th:text="${#strings.substring(service.description, 0, 400) + ' ...'}">
+                        </h3>
+                        <h3 th:unless="${#strings.length(service.description) > 400}"
+                            th:text="${service.description}">
+                        </h3>
                     </div>
                     <div class="book_area">
                         <div class="book_btn">
-                            <a href="#">BOOK NOW</a>
+                            <a th:if="${#authentication.principal == 'anonymousUser'}" th:href="@{/home/booking}">BOOK NOW</a>
+                            <a th:if="${#authentication.principal != 'anonymousUser' and #authentication.principal.roleId != 1}"
+                               th:href="@{/home/{categoryId}/services/booking/{userId}/{serviceId}
+                                            (userId = ${#authentication.principal.id},
+                                            serviceId = ${service.id}, categoryId = ${categoryId})
+                                          }"
+                               onclick="return confirm('Do you really want to add this service?')"
+                            >
+                                BOOK NOW
+                            </a>
+                            <a th:if="${#authentication.principal != 'anonymousUser' and #authentication.principal.roleId == 1}" href="#">
+                                BOOK NOW
+                            </a>
                         </div>
                     </div>
                 </div>

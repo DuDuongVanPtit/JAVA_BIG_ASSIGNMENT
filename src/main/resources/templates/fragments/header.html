@@ -162,8 +162,13 @@
                             <span sec:authentication="principal.fullName"></span>
                         </a>
                     </li>
-                    <li th:if="${#authentication.principal != 'anonymousUser'}">
-                        <a href="#">
+                    <li th:if="${#authentication.principal != 'anonymousUser' and #authentication.principal.roleId == 1}">
+                        <a th:href="@{/admin}">
+                            Admin Page
+                        </a>
+                    </li>
+                    <li th:if="${#authentication.principal != 'anonymousUser'and #authentication.principal.roleId != 1}">
+                        <a th:href="@{/home/booking/bookingList/{userId}(userId = ${#authentication.principal.id})}">
                             <i class="fa-solid fa-rectangle-list"></i>
                         </a>
                     </li>

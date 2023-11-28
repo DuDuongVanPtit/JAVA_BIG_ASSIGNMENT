@@ -26,6 +26,7 @@ public class SecurityConfig {
                         // admin** đệ quy(): cứ đường dẫn nào có /backend là chặn
                         // admin* chỉ chặn những yêu cầu /backend/user nhưng nếu /backend/user/list thì không chặn
                         .antMatchers("/admin/**").authenticated()
+                        .antMatchers("/home/booking").authenticated()
                         .anyRequest().permitAll()// các đường dẫn còn lại thì truy cập không bị chặn
                 )
 

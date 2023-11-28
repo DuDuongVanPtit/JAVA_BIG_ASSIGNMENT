@@ -49,18 +49,20 @@
             <table>
                 <thead>
                 <tr>
-                    <th>FullName</th>
+                    <th>Full Name</th>
                     <th>Email</th>
-                    <th>PhoneNumber</th>
+                    <th>Phone Number</th>
                     <th>Address</th>
+                    <th>Create At</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="user : ${list}" class="row">
+                <tr th:each="user, iterStat : ${list}" class="row">
                     <td th:text="${user.fullName}"></td>
                     <td th:text="${user.email}"></td>
                     <td th:text="${user.phoneNumber}"></td>
                     <td th:text="${user.address}"></td>
+                    <td th:if="${iterStat.index == 10}" th:text="${user.createdAt}"></td>
                 </tr>
                 </tbody>
             </table>

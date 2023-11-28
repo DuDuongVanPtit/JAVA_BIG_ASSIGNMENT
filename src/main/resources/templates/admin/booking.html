@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #display_container{
+            width: 100%;
+            background-color: palegoldenrod;
+            padding: 10px
+        }
+        #display_container h2{
+            padding-bottom: 20px;
+            text-align: center;
+            color: #333;
+            font-size: 30px;
+            font-weight: 600;
+        }
+        #display_container #table_container{
+            max-height: 750px;
+            overflow-y: auto;
+            margin-top: 10px;
+            border: 1px solid black;
+        }
+        #display_container table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #display_container table th,#display_container table td {
+            border: 1px solid #8f8f8f;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #display_container table th {
+            background-color: #f2f2f2;
+            text-align: center;
+            font-weight: 600;
+        }
+
+    </style>
+</head>
+<body>
+    <div th:replace="fragments/adminHeader :: html"></div>
+    <div id="display">
+        <div id="display_container">
+            <h2>List of customers who have booked tours</h2>
+            <div id="table_container">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Address</th>
+                        <th>Title</th>
+                        <th>Booking Date</th>
+                        <th>Total Money</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="booking : ${bookingList}">
+                        <td th:text="${booking.fullName}"></td>
+                        <td th:text="${booking.email}"></td>
+                        <td th:text="${booking.phoneNumber}"></td>
+                        <td th:text="${booking.address}"></td>
+                        <td th:text="${booking.title}"></td>
+                        <td th:text="${#strings.substring(booking.orderedAt, 0, 16)}"></td>
+                        <td th:text="${booking.totalMoney}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

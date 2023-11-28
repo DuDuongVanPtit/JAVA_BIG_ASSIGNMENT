@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Booking</title>
+    <style>
+        #slider{
+            margin-top: -80px;
+            width: 100%;
+            height: 700px;
+            margin-bottom: 10px;
+        }
+        #sliderHotel_container{
+            background-image: url("/images/bookingSlider1.jpg");
+            height: 100%;
+            width: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        #slider div{
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            font-size: 100px;
+            line-height: 700px;
+            color: white;
+            font-weight: 600;
+            text-shadow:
+                    -8px -1px 0 #000,
+                    1px -1px 0 #000,
+                    -1px  1px 0 #000,
+                    1px  1px 0 #000;
+        }
+
+
+        #booking_display{
+            padding-top: 20px;
+            padding-bottom: 20px;
+            width: 100%;
+            height: 100%;
+            background-color: #ffeaea;
+        }
+        #booking_display-container{
+            width: 1200px;
+            height: 100%;
+            margin: 0 auto;
+        }
+        #booking_display-container .booking_detail{
+            display: flex;
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 10px;
+            /*border: 1px solid black;*/
+            margin-bottom: 20px;
+        }
+        .booking_detail .booking_detail-thumbnail{
+            display: flex;
+            height: 100%;
+            width: 40%;
+        }
+        .booking_detail .booking_detail-money{
+            height: 100%;
+            width: 30%;
+        }
+        .booking_detail .booking_detail-handle{
+            text-align: center;
+            height: 100%;
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+    <!-- ------------------HEADER------------------ -->
+    <div th:replace="fragments/header :: html"></div>
+    <!-- ------------------HEADER------------------ -->
+    <div id="slider">
+        <div  id="sliderHotel_container">
+            <h1>Your Schedules</h1>
+        </div>
+    </div>
+    <div id="booking_display">
+        <div id="booking_display-container">
+            <div th:if="${bookingList == null or #lists.isEmpty(bookingList)}" style="display: flex; justify-content: space-around">
+                <p style="font-size: 20px">No bookings available.</p>
+                <a th:href="@{/home/category/{id}(id = 4)}"
+                    style="font-size: 20px; color: #4caf50; text-decoration: none">
+                    Booking now
+                </a>
+            </div>
+            <div th:if="${bookingList != null and not #lists.isEmpty(bookingList)}" th:each="booking: ${bookingList}" class="booking_detail">
+                <div class="booking_detail-thumbnail">
+                    <img th:src="${'/images/' + booking.thumbnail}" style="width: 40%; height: 100%; border-radius: 10px" alt="">
+                    <h1 style="padding-left: 10px; line-height: 100px" th:text="${booking.title}"></h1>
+                </div>
+                <div th:text="${booking.totalMoney} + '$'" class="booking_detail-money">
+
+                </div>
+                <div class="booking_detail-handle">
+                    <h1 style="color: #4caf50; padding-bottom: 10px">is being process</h1>
+                    <h1>Cancel</h1>
+                    <h1 th:text=" 'Booking date: ' + ${#strings.substring(booking.orderedAt, 0, 16)}" style="margin-top: 40px"></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

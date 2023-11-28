@@ -9,4 +9,6 @@ import java.util.ArrayList;
 
 public interface ServiceRepository extends JpaRepository <ServiceEntity, Integer> {
     ArrayList <ServiceEntity> findAllByCategoryId(Integer categoryId);
+
+    ServiceEntity findFirstById(Integer id);
 }
