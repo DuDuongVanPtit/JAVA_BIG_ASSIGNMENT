@@ -32,6 +32,8 @@ public class HomeController {
         Object categoryList = categoryService.getAllCategories();
         model.addAttribute("categoryList", categoryList);
         Object bestTourList = serviceService.getServicesByCategoryId(4);
+        Object bestRoomList = serviceService.getServicesByCategoryId(1);
+        model.addAttribute("bestRoomList", bestRoomList);
         model.addAttribute("bestTourList", bestTourList);
         return "/home/home.html";
     }

@@ -21,7 +21,11 @@ public class ServiceService {
     }
 
     public ArrayList<ServiceEntity> getServicesByCategoryId(Integer categoryId){
-        return (ArrayList<ServiceEntity>) serviceRepository.findAllByCategoryId(categoryId);
+        ArrayList<ServiceEntity> arr = serviceRepository.findAllByCategoryId(categoryId);
+        arr.sort((o1, o2) -> {
+            return o2.getDiscount() - o1.getDiscount();
+        });
+        return arr;
     }
 
     public ServiceDto getServiceById(Integer id){

@@ -144,7 +144,7 @@
         <div id="content_container">
             <div id="best_tour">
                 <div id="best_tour-title">
-                    <h1 style="font-size: 40px; font-weight: 600">Best room deals this week</h1>
+                    <h1 style="font-size: 40px; font-weight: 600">Best trip deals this week</h1>
                 </div>
                 <div id="best_tour-detail">
                     <div class="best_tour-detail--service_container"
@@ -170,16 +170,34 @@
                              <div style="width: 100%; height: 60%;">
                                 <div style="width: 50%; height: 50%; margin: auto; padding-top: 45px; display: flex">
                                     <ul>
-                                        <li style="padding-bottom: 10px; font-size: 30px; color: #eda84a; font-weight: 600" th:text="${'$' + (bestTour.price - bestTour.discount)}"></li>
-                                        <li th:if="${bestTour.discount > 0}"
-                                            style="text-decoration: line-through; font-size: 20px; color: white"
-                                            th:text="${'$' + bestTour.price}"></li>
+                                        <li style="padding-bottom: 10px; font-size: 30px; color: white; font-weight: 600;
+                                                   text-shadow:
+                                                                -3px -1px 0 #000,
+                                                                 1px -1px 0 #000,
+                                                                -1px  1px 0 #000,
+                                                                 1px  1px 0 #000;
+                                                   "
+                                            th:text="${'from $' + (bestTour.price - bestTour.discount)}">
+                                        </li>
+                                        <li style="text-decoration: line-through; font-size: 20px; color: black;
+                                                                    text-shadow:
+                                                                                -2px -1px 0 white,
+                                                                                 1px -1px 0 white,
+                                                                                -1px  1px 0 white,
+                                                                                 1px  1px 0 white;
+                                                   "
+                                            th:text="${'$' + bestTour.price}">
+                                        </li>
                                     </ul>
-                                    <h3 style="line-height: 84px; padding-left: 20px; font-size: 30px; color: red"
-                                        th:if="${bestTour.discount > 0}"
-                                        th:text="${'- ' + bestTour.discount + '$'}"></h3>
                                 </div>
                              </div>
+                            <!--       see more           -->
+                            <div style="width: fit-content; height: 15%;
+                                        background-color: #350a4e; margin: 0 auto;
+                                        border-radius: 20px; padding: 0 20px;
+                                        line-height: 42px; color: white; font-weight: 600">
+                                SEE MORE...
+                            </div>
                         </div>
                     </div>
                 </div>
