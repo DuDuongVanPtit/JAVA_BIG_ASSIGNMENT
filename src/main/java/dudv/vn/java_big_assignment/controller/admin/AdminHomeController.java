@@ -60,7 +60,6 @@ public class AdminHomeController {
         if(!multipartFile.isEmpty()){
             serviceService.addService(serviceDto);
             String tmp = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-            System.out.println(serviceDto.getId());
             String fileName = (serviceDto.getCode() + serviceDto.getId()) + tmp.substring(tmp.lastIndexOf("."));
             serviceDto.setThumbnail(fileName);
             String upload = Paths.get("src", "main", "resources", "static", "images").toString();
